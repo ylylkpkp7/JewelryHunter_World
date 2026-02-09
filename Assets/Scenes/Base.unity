@@ -1543,7 +1543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec3c07e01d18df94d924288471bfbbda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  nextSceneName: Bese
+  nextSceneName: Base
 --- !u!4 &889730241
 Transform:
   m_ObjectHideFlags: 0
