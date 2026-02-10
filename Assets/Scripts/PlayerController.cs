@@ -154,6 +154,12 @@ public class PlayerController : MonoBehaviour
     {
         rbody.linearVelocity = new Vector2(0,0);
     }
+    
+    //プレイヤーのaxisH()の値を取得
+    public float GetAxisH()
+    {
+        return axisH;
+    }
 
 
 }
