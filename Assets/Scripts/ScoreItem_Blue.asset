@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23b75d99751d06a45be9aa786b560b00, type: 3}
+  m_Name: ScoreItem_Blue
+  m_EditorClassIdentifier: Assembly-CSharp::ItemDate
+  value: 30
+  itemName: blue
+  itemSprite: {fileID: -3244114122435731308, guid: 754dcc5b159545b49902843e20cb6fd7, type: 3}
