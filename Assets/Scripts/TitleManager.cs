@@ -4,7 +4,8 @@ using UnityEngine.SceneManagement;
 public class TitleManager : MonoBehaviour
    
 {
-    public string sceneName;
+    public string sceneName;//スタートボタンを押して読み込むシーン名
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,8 +17,10 @@ public class TitleManager : MonoBehaviour
     {
 
     }
+    //シーンを読み込むメソッド作成
     public void Load()
     {
+        GameManager.totalScore = 0;//新しくゲームを始めるにあたってスコアをリセット
         SceneManager.LoadScene(sceneName);
     }
 }
