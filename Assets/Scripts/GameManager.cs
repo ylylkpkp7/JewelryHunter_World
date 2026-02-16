@@ -13,17 +13,26 @@ public enum GameState           // ゲームの状態
 
 public class GameManager : MonoBehaviour
 {
+   
+
+    //スコア追加
+    public static int totalScore; //合計スコア
+
     // ゲームの状態
     public static GameState gameState;
     public string nextSceneName;            // 次のシーン名
 
-    //スコア追加
-    public static int totalScore; //合計スコア
+    //サウンド関連
+    public AudioClip meGameClear;//ゲームクリアの音源
+    public AudioClip meGameOver;//ゲームオーバーの音
+
+    AudioSource soundPlayer; //AudioSouece型の変数
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         gameState = GameState.InGame;//ステータスをゲーム中にする
+        soundPlayer = GetComponent<AudioSource>(); //AudioSourceを参照する
     }
 
     // Update is called once per frame
@@ -32,10 +41,14 @@ public class GameManager : MonoBehaviour
         if
             (gameState == GameState.GameClear)
         {
+            soundPlayer.Stop();//ステージ曲を止める
+            soundPlayer.PlayOneShot(meGameClear);//ゲームクリアの音を一回だけ鳴らす
             gameState = GameState.GameEnd;//ゲームの状態を更新
         }
         else if (gameState == GameState.GameOver)
         {
+            soundPlayer.Stop();//ステージ曲を止める
+            soundPlayer.PlayOneShot(meGameOver);//ゲームクリアの音を一回だけ鳴らす
             gameState = GameState.GameEnd;//ゲームの状態を更新
         }
 
