@@ -1,3 +1,5 @@
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -74,7 +76,7 @@ public class World_PlayerController : MonoBehaviour
         {
             transform.localScale = new Vector2(1, 1);//äGÇÕÇªÇÃÇ‹Ç‹
         }
-        else if(dir == Direction.left) 
+        else if (dir == Direction.left)
         {
             transform.localScale = new Vector2(-1, 1);//äGÇÕãtì]
         }
@@ -87,10 +89,11 @@ public class World_PlayerController : MonoBehaviour
         {
             animator.SetBool("Run", false);//RunÉpÉâÉÅÅ[É^Å[Çfalse
         }
-
+       
     }
-    void FixsdUpdate()
+    void FixedUpdate()
     {
         rbody.linearVelocity = moveVec * speed;
     }
+    
 }
