@@ -126,5 +126,5 @@ public class MovingBlock : MonoBehaviour
         //移動位置
         Vector2 toPos = new Vector3(fromPos.x + moveX, fromPos.y + moveY);
         Gizmos.DrawWireCube(toPos, new Vector2(size.x, size.y));
-    }
+    }  
 }

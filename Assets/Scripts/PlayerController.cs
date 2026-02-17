@@ -218,7 +218,7 @@ public class PlayerController : MonoBehaviour
     //UI表示にSubmitボタンが押されたら
     void OnSubmit(InputValue yalue)
     {
-        //もしゲームちゅうでなければ
+        //もしゲーム中でなければ
         if (GameManager.gameState != GameState.InGame)
         {
             //GameManagerスクリプトのGameEndメソッドの発動
