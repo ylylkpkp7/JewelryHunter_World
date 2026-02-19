@@ -1,17 +1,17 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.WSA;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class PlayerController : MonoBehaviour
 {
-    Rigidbody2D rbody;
-    float axisH = 0.0f;
-    public float speed = 3.0f;
-    public float jump = 9.0f;
-    public LayerMask groundLayer;//レイヤー指定
-    bool goJump = false;//true,false
-    bool onGround = false;//true,false
-
+    Rigidbody2D rbody;　// Rigidbody2D型の変数
+    float axisH = 0.0f;　 // 入力
+    public float speed = 3.0f;　// 移動速度
+    public float jump = 9.0f;　// ジャンプ力
+    public LayerMask groundLayer;// 着地できるレイヤー
+    bool goJump = false;// ジャンプ開始フラグ
+    bool onGround = false;//// 地面フラグ
     // アニメーション対応
     Animator animator; // アニメーター
 
@@ -31,6 +31,18 @@ public class PlayerController : MonoBehaviour
     PlayerInput input;　//PlayerInputコンポーネント
 
     GameManager gm;　//GameManagerスクリプト
+
+    public static int playerLife = 10; //Playerの体力
+
+    bool inDamage; //ダメージ管理フラグ
+
+    //PlayerLifeの回復メソッド
+    public static void PlayerRecovery(int life)
+    {
+        playerLife += life; //引数lifeだけ回復
+        if (playerLife > 10) playerLife = 10;
+
+    }
 
     void OnMove(InputValue value)
     {
@@ -66,14 +78,32 @@ public class PlayerController : MonoBehaviour
 
         //GameObject型のアタッチされている特定のコンポーネントを探してくるメソッド
         gm = GameObject.FindFirstObjectByType<GameManager>();
+
+        playerLife = 10; //体力を全快にする
     }
 
     // Update is called once per frame
     void Update()
 
     {
-        if (GameManager.gameState != GameState.InGame)
+        if (GameManager.gameState != GameState.InGame || inDamage)
         {
+            //もしダメージ管理フラグが立っていたら点滅処理
+            if(inDamage)
+            {
+                //Sin関数の角度に経過時間（一定リズムの値）を与えると、等間隔でプラスとマイナスの結果が得られる
+                float val = Mathf.Sin(Time.time * 50);
+                
+                //等間隔で変わっているであろうvalの値をチェックして、プラスの時間帯は表示、マイナスの時間帯は非表示
+                if (val > 0)
+                {
+                    GetComponent<SpriteRenderer>().enabled = true;
+                }
+                else
+                {
+                    GetComponent<SpriteRenderer>().enabled = false;
+                }
+            }
             return;//Updateを中断
         }
         //地上判定
@@ -136,7 +166,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (GameManager.gameState != GameState.InGame)
+        //ゲームのステータスがInGameじゃない時、またはダメージ管理フラグがtrueの時
+        if (GameManager.gameState != GameState.InGame || inDamage == true)
         {
             return;//Updateを中断
         }
@@ -180,6 +211,14 @@ public class PlayerController : MonoBehaviour
             }
             score = 0; //次に備えてスコアをリセット
             Destroy(collision.gameObject);              // アイテム削除する
+        }
+        else if (collision.gameObject.tag == "Enemy")
+        {
+            if (!inDamage)//ダメージ中でなければ
+            {
+                //ぶつかった相手のオブジェクト情報を引数
+                GetDamage(collision.gameObject);
+            }
         }
     }
 
@@ -232,6 +271,35 @@ public class PlayerController : MonoBehaviour
     {
         return axisH;
     }
+    //ダメージメソッド
+    void GetDamage(GameObject target)
+    {
+        //プレイ中のみ発動
+        if (GameManager.gameState == GameState.InGame)
+        {
+            playerLife -= 1;//体力を減少
+            if (playerLife > 0)//まだゲームオーバーじゃなければ
+            {
+                //ぶつかった相手と反対方向にノックバック
+                rbody.linearVelocity = new Vector2(0, 0);
+                Vector3 v = (transform.position - target.transform.position).normalized;
+                rbody.AddForce(new Vector2(v.x * 4, v.y * 4), ForceMode2D.Impulse);
+                //ダメージ管理フラグを立てる
+                inDamage = true;
+                //時間差でダメージ管理フラグを降ろす
+                Invoke("DamageEnd", 0.25f);
+            }
+            else　//playerLifeが0以下になってしまったら
+            {
+                GameOver();
+            }
+        }
+    }
 
-
+    void DamageEnd()//ダメージ管理フラグをOFFにするメソッド
+    {
+        inDamage = false;
+        //ダメージ終了（点滅終了）と同時に確実に姿を表示させる
+        GetComponent<SpriteRenderer>().enabled = true;
+    }
 }

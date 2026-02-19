@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     public bool isGameOver = false;//ゲームオーバー判定
 
     //ワールドマップで最後に入ったエントランスのドア番号
-    public static int curetDoorNumber = 0;
+    public static int currentDoorNumber = 0;
 
     //所持アイテム　鍵の管理
     public static int keys = 1;
