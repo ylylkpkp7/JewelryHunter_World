@@ -1,3 +1,4 @@
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -9,6 +10,11 @@ public class EnemyController : MonoBehaviour
     bool onGround = false;              // 地面フラグ
     float time = 0;
 
+    public float enemyLife = 3; //敵の体力
+    bool inDamage; //ダメージ管理フラグ
+
+    Rigidbody2D rbody; //死亡演出のため
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,6 +22,8 @@ public class EnemyController : MonoBehaviour
         {
             transform.localScale = new Vector2(-1, 1);// 向きの変更
         }
+
+        rbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -44,6 +52,13 @@ public class EnemyController : MonoBehaviour
                 }
             }
         }
+
+        //ダメージ管理フラグが立っていたら点滅処理
+        if (inDamage)        {
+            //三角関数Sinに角度（時間経過）を与えて正/負の値を算出
+            float val = Mathf.Sin(Time.time * 50);            if (val > 0) //正なら表示
+            {                GetComponent<SpriteRenderer>().enabled = true;            }            else //負なら非表示
+            {                GetComponent<SpriteRenderer>().enabled = false;            }        }
     }
 
     void FixedUpdate()
@@ -65,7 +80,7 @@ public class EnemyController : MonoBehaviour
     }
 
     // 接触
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         isToRight = !isToRight;     //フラグを反転させる
         time = 0;                   //タイマーを初期化
@@ -76,6 +91,39 @@ public class EnemyController : MonoBehaviour
         else
         {
             transform.localScale = new Vector2(1, 1); // 向きの変更
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!inDamage)
+        {
+            //ぶつかった相手がArrowだったら
+            if (collision.gameObject.tag == "Arrow")
+            {
+                //ぶつかった矢のスクリプトを取得
+                ArrowController arrowCnt = collision.gameObject.GetComponent<ArrowController>();
+                //相手の変数attackPower分だけ体力を減らす
+                enemyLife -= arrowCnt.attackPower;
+                //ダメージ管理のフラグを立てる
+                inDamage = true;
+                //0.25秒後にフラグが降りる
+                Invoke("DamageEnd", 0.25f);
+
+                if (enemyLife <= 0) //死亡演出
+                {
+                    rbody.linearVelocity = Vector2.zero;//動きを止める
+                    GetComponent<CircleCollider2D>().enabled = false;
+                    rbody.AddForce(new Vector2(0, 3), ForceMode2D.Impulse);
+                    Destroy(gameObject, 0.3f);
+                }
+            }
+
+        }
+        void DamageEnd()
+        {
+            inDamage = false; //フラグを戻す
+            GetComponent<SpriteRenderer>().enabled = true;
         }
     }
 }

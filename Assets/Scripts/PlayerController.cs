@@ -36,6 +36,13 @@ public class PlayerController : MonoBehaviour
 
     bool inDamage; //ダメージ管理フラグ
 
+    public float shootSpeed = 12.0f; //矢の速度
+    public float shootDelay = 0.25f; //発射間隔
+    public GameObject arrowPrefab; //矢のプレハブ
+    public GameObject gate; //矢の発射位置を担当するオブジェクト
+
+    
+
     //PlayerLifeの回復メソッド
     public static void PlayerRecovery(int life)
     {
@@ -59,6 +66,36 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void OnAttack(InputValue yalue)
+    {
+        if(GameManager.arrows > 0)//矢の残数があれば
+        {
+            ShootArrow(); //矢を発射
+        }
+    }
+
+
+
+    void ShootArrow()
+    {
+        GameManager.arrows--; //矢を減らす
+        Quaternion r; //回転の3軸の値
+        //Playerの絵の向きが右向き
+        if (transform.localScale.x > 0)
+        {
+            r = Quaternion.Euler(0, 0, 0);
+        }
+        else //Playerの絵の向きが左向き
+        {
+            r = Quaternion.Euler(0, 0, 180);
+        }
+        //Gateオブジェクトの位置にｒの回転で矢を生成
+        GameObject arrowObj = Instantiate(arrowPrefab,gate.transform.position, r);
+        //生成した矢自身のRigidbody2Dを取得
+        Rigidbody2D arrowRbody = arrowObj.GetComponent<Rigidbody2D>();
+        //Playerの絵の向きに合わせた方向に矢を飛ばす
+        arrowRbody.AddForce(new Vector2(transform.localScale.x, 0)* shootSpeed, ForceMode2D.Impulse);
+    }
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -89,11 +126,11 @@ public class PlayerController : MonoBehaviour
         if (GameManager.gameState != GameState.InGame || inDamage)
         {
             //もしダメージ管理フラグが立っていたら点滅処理
-            if(inDamage)
+            if (inDamage)
             {
                 //Sin関数の角度に経過時間（一定リズムの値）を与えると、等間隔でプラスとマイナスの結果が得られる
                 float val = Mathf.Sin(Time.time * 50);
-                
+
                 //等間隔で変わっているであろうvalの値をチェックして、プラスの時間帯は表示、マイナスの時間帯は非表示
                 if (val > 0)
                 {
