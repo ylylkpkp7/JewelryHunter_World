@@ -70,21 +70,28 @@ public class GameManager : MonoBehaviour
         if
             (gameState == GameState.GameClear)
         {
+            //Debug.Log("LateClear");
             soundPlayer.Stop();//ステージ曲を止める
             soundPlayer.PlayOneShot(meGameClear);//ゲームクリアの音を一回だけ鳴らす
             isGameClear = true; //クリアフラグ
-            gameState = GameState.GameEnd;//ゲームの状態を更新
+            Invoke("GameStatusChange", 0.02f);
+            //gameState = GameState.GameEnd;//ゲームの状態を更新
         }
         else if (gameState == GameState.GameOver)
         {
             soundPlayer.Stop();//ステージ曲を止める
             soundPlayer.PlayOneShot(meGameOver);//ゲームクリアの音を一回だけ鳴らす
             isGameOver = true; //ゲームオーバーフラグ
-            gameState = GameState.GameEnd;//ゲームの状態を更新
+            Invoke("GameStatusChange", 0.02f);
+            //gameState = GameState.GameEnd;//ゲームの状態を更新
         }
-
-
     }
+
+    void GameStatusChange()
+    {
+        gameState = GameState.GameEnd; //ゲームの状態を更新
+    }
+
     //リスタート
     public void Restart()
     {
@@ -94,6 +101,7 @@ public class GameManager : MonoBehaviour
     //次へ
     public void Next()
     {
+        SaveDataManager.SaveGamedata(); //ワールドマップに戻るタイミングでオートセーブ
         SceneManager.LoadScene(nextSceneName);
     }
 

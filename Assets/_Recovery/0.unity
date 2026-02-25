@@ -1252,11 +1252,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2383989405994135031, guid: c7cfef02ad1f6d7488d3e10657e7d55b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2383989405994135031, guid: c7cfef02ad1f6d7488d3e10657e7d55b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2383989405994135031, guid: c7cfef02ad1f6d7488d3e10657e7d55b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1291,20 +1291,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3808117382234616758, guid: c7cfef02ad1f6d7488d3e10657e7d55b, type: 3}
-      propertyPath: camTop
-      value: 2.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3808117382234616758, guid: c7cfef02ad1f6d7488d3e10657e7d55b, type: 3}
       propertyPath: camLeft
       value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 3808117382234616758, guid: c7cfef02ad1f6d7488d3e10657e7d55b, type: 3}
       propertyPath: camRight
       value: 5.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3808117382234616758, guid: c7cfef02ad1f6d7488d3e10657e7d55b, type: 3}
-      propertyPath: isForceScrollX
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4272229652573525491, guid: c7cfef02ad1f6d7488d3e10657e7d55b, type: 3}
       propertyPath: m_Layer

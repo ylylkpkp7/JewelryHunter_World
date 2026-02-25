@@ -105,25 +105,26 @@ public class EnemyController : MonoBehaviour
                 ArrowController arrowCnt = collision.gameObject.GetComponent<ArrowController>();
                 //相手の変数attackPower分だけ体力を減らす
                 enemyLife -= arrowCnt.attackPower;
-                //ダメージ管理のフラグを立てる
+
+                //ダメージ管理フラグを立てる
                 inDamage = true;
                 //0.25秒後にフラグが降りる
                 Invoke("DamageEnd", 0.25f);
 
                 if (enemyLife <= 0) //死亡演出
                 {
-                    rbody.linearVelocity = Vector2.zero;//動きを止める
+                    rbody.linearVelocity = Vector2.zero; //動きを止める
                     GetComponent<CircleCollider2D>().enabled = false;
                     rbody.AddForce(new Vector2(0, 3), ForceMode2D.Impulse);
                     Destroy(gameObject, 0.3f);
                 }
             }
-
         }
-        void DamageEnd()
+    }
+    void DamageEnd()
         {
             inDamage = false; //フラグを戻す
             GetComponent<SpriteRenderer>().enabled = true;
         }
     }
-}
+

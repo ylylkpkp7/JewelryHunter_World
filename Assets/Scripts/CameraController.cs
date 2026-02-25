@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CameraManager : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
     //カメラ制御
     public float camLeft = 0.0f;        // カメラ左スクロールリミット

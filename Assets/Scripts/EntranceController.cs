@@ -62,6 +62,8 @@ public class EntranceController : MonoBehaviour
                     //World_UIControllerが所持している開錠の帳簿(keyOpenedディクショナリー）に開錠したという情報を記録
                     World_UIController.keyOpened[doorNumber] = true;
                     announcement = true;　//アナウンス中フラグ
+
+                    SaveDataManager.SaveGamedata(); //鍵を開けたらオートセーブ
                 }
                 else　//未開錠で鍵ももっていない
                 {
