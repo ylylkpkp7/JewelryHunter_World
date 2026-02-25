@@ -57,7 +57,7 @@ public class World_PlayerController : MonoBehaviour
         {
             dir = Direction.right;
         }
-        else if (angleZ >= 91 && angleZ <= 180 || angleZ >= -180 && angleZ <=-91)
+        else if (angleZ >= 91 && angleZ <= 180 || angleZ >= -180 && angleZ <= -91)
         {
             dir = Direction.left;
         }
@@ -95,7 +95,7 @@ public class World_PlayerController : MonoBehaviour
         //移動キー/移動スティックが入力されていそうならRun
         if (moveVec != Vector2.zero)
         {
-            animator.SetBool("Run", true);
+            animator.SetBool("Run", true);//Runパラメーターをtrue
         }
         else
         {
