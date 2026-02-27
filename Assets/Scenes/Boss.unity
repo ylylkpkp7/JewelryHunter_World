@@ -1276,6 +1276,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6576221891731872883, guid: 27573f8187eb0c948b6656c33a5a0fc5, type: 3}
+      propertyPath: gameTime
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 9027713450779250184, guid: 27573f8187eb0c948b6656c33a5a0fc5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1359,7 +1363,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3808117382234616758, guid: c7cfef02ad1f6d7488d3e10657e7d55b, type: 3}
       propertyPath: isForceScrollX
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4272229652573525491, guid: c7cfef02ad1f6d7488d3e10657e7d55b, type: 3}
       propertyPath: m_Layer

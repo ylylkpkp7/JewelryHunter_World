@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1331898913603750999}
   - component: {fileID: 5604527723429215951}
   - component: {fileID: 1336236898053061775}
-  - component: {fileID: 389781917604293612}
   m_Layer: 0
   m_Name: Switch
   m_TagString: Switch
@@ -84,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -1314923570169941335, guid: 541b25f9d6e46bd4bbcb0a198a1dc9c7, type: 3}
+  m_Sprite: {fileID: -2621107458859240990, guid: 4b7e36ea6e274fc4eb2a53fe463bdf4f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -132,7 +131,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.11, y: 1.2}
+    oldSize: {x: 1.16, y: 1}
     newSize: {x: 1.11, y: 1.2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -156,18 +155,3 @@ MonoBehaviour:
   imageOff: {fileID: -2621107458859240990, guid: 4b7e36ea6e274fc4eb2a53fe463bdf4f, type: 3}
   imageOn: {fileID: 4000373562756134585, guid: 90594f5fe94234b48bc858b81987da1c, type: 3}
   on: 0
---- !u!114 &389781917604293612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2876929826061309687}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66f0c91326d029647a70d364a17a2693, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  doorNumber: 0
-  sceneName: Bese
-  opened: 0

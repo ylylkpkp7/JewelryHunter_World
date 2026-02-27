@@ -26,10 +26,7 @@ public class BossEntrance : MonoBehaviour
                 if (entranceController != null)
                 {
                     //帳簿(KeyOpendディクショナリー)に変数doorNumberと変数openedの状況を記録
-                    stagesClear.Add(
-                        entranceController.doorNumber,
-                        false
-                    );
+                    stagesClear.Add(entranceController.doorNumber,false);
                 }
             }
         }

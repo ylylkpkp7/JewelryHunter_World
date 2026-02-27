@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class EntranceController : MonoBehaviour
 {
 
-    public int doorNumber;　//ドア番号
+    public int doorNumber=0;　//ドア番号
     public string sceneName;　//移行したいシーン名
     public bool opened;　//開錠状況
 
